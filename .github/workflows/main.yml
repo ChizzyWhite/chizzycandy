@@ -12,7 +12,15 @@ jobs:
   steps:
    - name: Step one 
      uses: actions/checkout@v4
-    
+
+   - name: Verify Secrets Availability
+     run: | 
+       if [ -n "${{ secrets.chizzycandy }}" ]; then
+         echo "Username secret is readable."
+       else
+         echo "Username secret is EMPTY OR NOT FOUND."
+       fi
+        
    - name: Build Docker Image
      run: docker build -t first-project .
 
